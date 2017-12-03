@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+        http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+	<!-- 注册注解驱动 -->
+	<mvc:annotation-driven />
+	<!-- 静态资源处理 -->
+	<mvc:default-servlet-handler />
+	<!-- 包扫描 -->
+	<dubbo:annotation package="com.atguigu.electricity.manager.controller" />
+	<context:component-scan base-package="com.atguigu.electricity.manager.controller" />
+
+	<!-- 配置dubbo应用服务 -->
+	<dubbo:application name="electricity-manager-consumer" />
+
+	<!-- dubbo注册中心服务 protocol:使用保存信息的协议 address:zookeeper的ip和端口号 -->
+	<dubbo:registry address="192.168.232.132:2181" protocol="zookeeper"></dubbo:registry>
+
+	<!-- 在duubo中暴露服务 -->
+	<dubbo:protocol name="dubbo" port="20880" />
+
+
+
+	<!-- 获取代理对象 -->
+	<!-- <dubbo:reference interface="com.atguigu.electricity.manager.service.GetDemo" 
+		id="getDemo"></dubbo:reference> -->
+	<dubbo:reference
+		interface="com.atguigu.electricity.manager.service.CategoryService"
+		id="categoryService"></dubbo:reference>
+	<dubbo:reference
+		interface="com.atguigu.electricity.manager.service.ProductService" id="productService"></dubbo:reference>
+
+	<!-- 视图解析器 -->
+	<bean id="viewResolver"
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/jsps/"></property>
+		<property name="suffix" value=".jsp"></property>
+	</bean>
+
+	<!-- 文件上传 -->
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="defaultEncoding" value="UTF-8" />
+		<property name="maxUploadSize" value="#{1024*1024*100}"></property>
+	</bean>
+
+
+
+</beans>
