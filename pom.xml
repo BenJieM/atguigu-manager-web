@@ -26,6 +26,12 @@
 			<artifactId>atguigu-manager-interface</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
+		<!-- FastDFS_client -->
+		<dependency>
+			<groupId>com.alibaba.fastdfs</groupId>
+			<artifactId>fastdfs_client</artifactId>
+			<version>1.25</version>
+		</dependency>
 
 		<!-- Spring -->
 		<dependency>
@@ -93,6 +99,13 @@
 			<groupId>org.json</groupId>
 			<artifactId>json</artifactId>
 		</dependency>
+
+		<!-- 文件上传 -->
+		<dependency>
+			<groupId>commons-fileupload</groupId>
+			<artifactId>commons-fileupload</artifactId>
+		</dependency>
+
 	</dependencies>
 
 	<build>

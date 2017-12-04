@@ -1,5 +1,6 @@
 package com.atguigu.electricity.manager.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -11,7 +12,8 @@ import com.atguigu.electricity.manager.service.GetDemo;
 @RequestMapping("/demo")
 public class DemoControlller {
 
-	@Reference(interfaceClass=GetDemo.class)
+//	@Reference(interfaceClass=GetDemo.class)
+	@Autowired
 	private GetDemo getDemo;
 	
 	@RequestMapping("/date")
